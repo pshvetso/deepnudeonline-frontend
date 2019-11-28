@@ -11,5 +11,10 @@ export default new Router({
             name: "Feed",
             component: () => import("./components/Feed")
         },
+        {
+            path: "/upload",
+            name: "Upload",
+            component: () => import("./components/UploadForm")
+        },
     ]
 });
