@@ -21,7 +21,7 @@
             stage: null,
             img: null,
             strokeDash: null,
-            r: null,
+            rect: null,
             moveListener: null,
         }),
         mounted() {
@@ -40,7 +40,7 @@
 
             this.selection = selection;
             this.strokeDash = sd;
-            this.r = r;
+            this.rect = r;
             this.moveListener = moveListener;
         },
         methods: {
@@ -90,13 +90,13 @@
             },
             dragStart: function(event) {
                 this.stage.addChild(this.selection).set({x:event.stageX, y:event.stageY});
-                this.r.w = 0;
-                this.r.h = 0;
+                this.rect.w = 0;
+                this.rect.h = 0;
                 this.moveListener = this.stage.on("stagemousemove", this.drag);
             },
             drag: function(event) {
-                this.r.w = event.stageX - this.selection.x;
-                this.r.h = event.stageY - this.selection.y;
+                this.rect.w = event.stageX - this.selection.x;
+                this.rect.h = event.stageY - this.selection.y;
             },
             dragEnd: function() {
                 this.stage.off("stagemousemove", this.moveListener);

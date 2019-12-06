@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid">
-{{feed}}
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -9,50 +8,22 @@
             <li class="breadcrumb-item active">Overview</li>
         </ol>
 
-        <div class="card mb-3">
+        <div v-for="post in feed" :key="post.id" class="card mb-3">
             <div class="post-header">
-                <div><img src="../assets/img/u/jupiter-logo.png" /></div>
-                <div class="post-user-date"><div class="user">Pasha Sukhoy</div><div class="date">11:59</div></div>
+                <div><img :src="require(`@/assets/img/a/${post.userId}.png`)" /></div>
+                <div class="post-user-date"><div class="user">{{ post.firstName + ' ' + post.lastName }}</div><div class="date"><Format :value="post.date" fn="datetime" /></div></div>
             </div>
             <div class="card-body">
-                <p>Ashlee Cooper deep nude</p>
-                <img src="../assets/img/u/deepnude-01.jpg">
+                <p>{{ post.title }}</p>
+                <img :src="require(`@/assets/img/u/${post.id}.jpg`)">
             </div>
             <div class="card-footer">
-                <div><i class="far fa-fw fa-heart"></i>123</div>
-                <div><i class="far fa-fw fa-eye"></i>4321</div>
+                <div><i class="far fa-fw fa-heart"></i>{{post.likes}}</div>
+                <div><i class="far fa-fw fa-eye"></i>{{post.views}}</div>
             </div>
         </div>
 
-        <div class="card mb-3">
-            <div class="post-header">
-                <div><img src="../assets/img/u/jupiter-logo.png" /></div>
-                <div class="post-user-date"><div class="user">Pasha Sukhoy</div><div class="date">11:50</div></div>
-            </div>
-            <div class="card-body">
-                <p>Britney Spears deep nude</p>
-                <img src="../assets/img/u/deepnude-02.jpg">
-            </div>
-            <div class="card-footer">
-                <div><i class="far fa-fw fa-heart"></i>78</div>
-                <div><i class="far fa-fw fa-eye"></i>574</div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="post-header">
-                <div><img src="../assets/img/u/jupiter-logo.png" /></div>
-                <div class="post-user-date"><div class="user">Pasha Sukhoy</div><div class="date">11:35</div></div>
-            </div>
-            <div class="card-body">
-                <p>Alicia Beethooven deep nude</p>
-                <img src="../assets/img/u/deepnude-03.jpg">
-            </div>
-            <div class="card-footer">
-                <div><i class="far fa-fw fa-heart"></i>201</div>
-                <div><i class="far fa-fw fa-eye"></i>6547</div>
-            </div>
-        </div>
+        <p v-if="errors.length">{{ errors }}</p>
 
     </div>
     <!-- /.container-fluid -->
@@ -60,9 +31,13 @@
 
 <script>
     import axios from 'axios';
+    import Format from './Format.vue';
 
 export default {
     name: "Feed",
+    components: {
+        Format
+    },
     data: () => ({
         feed: [],
         errors: [],
@@ -73,7 +48,7 @@ export default {
     methods: {
         callAPI() {
             axios
-                .get("/api/feed")
+                .get("/api/feed?startFrom=")
                 .then(response => {
                     this.feed = response.data;
                 })
