@@ -17,5 +17,15 @@ export default new Router({
             name: "Upload",
             component: () => import("./components/UploadForm")
         },
+        {
+            path: "/mypage",
+            name: "MyPage",
+            component: () => import("./components/MyPage")
+        },
+        {
+            path: "/top",
+            name: "Top",
+            component: () => import("./components/Top")
+        },
     ]
 });
