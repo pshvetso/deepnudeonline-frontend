@@ -1,13 +1,5 @@
 <template>
-    <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">Overview</li>
-        </ol>
-
+    <div>
         <div v-for="post in feed" :key="post.id" class="card mb-3">
             <div class="post-header">
                 <div><img :src="require(`@/assets/img/a/${post.userId}.png`)" /></div>
@@ -26,7 +18,6 @@
         <p v-if="errors.length">{{ errors }}</p>
 
     </div>
-    <!-- /.container-fluid -->
 </template>
 
 <script>
@@ -41,23 +32,57 @@ export default {
     data: () => ({
         feed: [],
         errors: [],
+        startPostId: "",
+        isApiCallPending: false,
+        noMoreNews: false,
     }),
     mounted() {
         this.callAPI();
     },
     methods: {
         callAPI() {
+            if(this.isApiCallPending || this.noMoreNews) {
+                return
+            }
+
+            this.isApiCallPending = true;
+
+            //window.console.log("/api/feed?startFrom=" + this.startPostId);
             axios
-                .get("/api/feed?startFrom=")
+                .get("/api/feed?startFrom=" + this.startPostId)
                 .then(response => {
-                    this.feed = response.data;
+                    this.isApiCallPending = false;
+                    let data = response.data;
+                    //window.console.log(data);
+
+                    if(data.length > 0) {
+                        this.feed.push(...data);
+                        this.startPostId = data[data.length - 1].id;
+                    } else {
+                        this.noMoreNews = true;
+                    }
                 })
                 .catch(error => {
                     //this.errors = err;
                     this.errors.push(error);
                 });
+        },
+        handleScroll (/*event*/) {
+            if ((window.innerHeight + window.scrollY) + 1 >= document.body.offsetHeight) {
+                //window.console.log("you're at the bottom of the page");
+                //window.console.log((window.innerHeight + window.scrollY) - document.body.offsetHeight);
+                this.callAPI();
+            }
+
+            //window.console.log(window.innerHeight +" " + window.scrollY +" "+ document.body.offsetHeight);
         }
-    }
+    },
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
 };
 </script>
 

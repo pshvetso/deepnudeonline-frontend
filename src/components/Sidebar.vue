@@ -1,20 +1,20 @@
 <template>
     <div>
         <ul class="sidebar navbar-nav">
-            <template v-for="routes in links">
-                <div v-if="routes.header" class="sidebar-heading" v-bind:key="routes.id">
+            <div v-for="routes in links" v-bind:key="routes.id">
+                <div v-if="routes.header" class="sidebar-heading">
                     {{routes.header}}
                 </div>
-                <router-link :to="routes.page" v-bind:key="routes.id" v-slot="{ href, isExactActive  }">
-                        <li class="nav-item" :class="[isExactActive && 'active']">
-                            <a :href="href" class="nav-link">
-                                <i class="fa-fw" :class="`${routes.class}`"></i>
-                                <span>{{ routes.text }}</span>
-                            </a>
-                        </li>
+                <router-link :to="routes.page" v-slot="{ href, isExactActive  }">
+                    <li class="nav-item" :class="[isExactActive && 'active']">
+                        <a :href="href" class="nav-link">
+                            <i class="fa-fw" :class="`${routes.class}`"></i>
+                            <span>{{ routes.text }}</span>
+                        </a>
+                    </li>
                 </router-link>
                 <hr v-if="routes.hr" class="sidebar-divider" v-bind:key="routes.id">
-            </template>
+            </div>
         </ul>
     </div>
 </template>
@@ -40,26 +40,26 @@
                 {
                     id: 2,
                     text: 'Today',
-                    page: { path: 'top', query: { interval: 'day' }},
+                    page: {path: 'top', query: {interval: 'day'}},
                     class: 'fas fa-angle-double-up',
                     header: "Top",
                 },
                 {
                     id: 3,
                     text: 'Week',
-                    page: { path: 'top', query: { interval: 'week' }},
+                    page: {path: 'top', query: {interval: 'week'}},
                     class: 'fas fa-angle-double-up',
                 },
                 {
                     id: 4,
                     text: 'Month',
-                    page: { path: 'top', query: { interval: 'month' }},
+                    page: {path: 'top', query: {interval: 'month'}},
                     class: 'fas fa-angle-double-up',
                 },
                 {
                     id: 5,
                     text: 'All time',
-                    page: { path: 'top', query: { interval: 'alltime' }},
+                    page: {path: 'top', query: {interval: 'alltime'}},
                     class: 'fas fa-arrow-up',
                     hr: true,
                 },
@@ -76,10 +76,6 @@
         margin-top: 16px;
         border-radius: .25rem;
         border-top: 3px #94ff99 solid;
-    }
-
-    .sidebar .nav-item:last-child {
-        margin-bottom: 1rem;
     }
 
     .sidebar .nav-item:hover {
@@ -154,10 +150,6 @@
     @media (min-width: 768px) {
         .sidebar {
             width: 225px !important;
-        }
-
-        .sidebar.toggled .nav-item:last-child {
-            margin-bottom: 1rem;
         }
 
         .sidebar .nav-item .nav-link {

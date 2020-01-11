@@ -10,22 +10,39 @@ export default new Router({
         {
             path: "/",
             name: "Feed",
-            component: () => import("./components/Feed")
+            component: () => import("./components/Feed"),
+            meta: {
+                breadcrumbs: [
+                ]
+            }
         },
         {
             path: "/upload",
             name: "Upload",
-            component: () => import("./components/UploadForm")
+            component: () => import("./components/UploadForm"),
+            meta: {
+                breadcrumbs: [
+                    {name: "Top", link: "top"},
+                ]
+            }
         },
         {
             path: "/mypage",
-            name: "MyPage",
-            component: () => import("./components/MyPage")
+            name: "My page",
+            component: () => import("./components/MyPage"),
+            meta: {
+                breadcrumbs: [
+                ]
+            }
         },
         {
             path: "/top",
             name: "Top",
-            component: () => import("./components/Top")
+            component: () => import("./components/Top"),
+            meta: {
+                breadcrumb: [
+                ]
+            }
         },
     ]
 });

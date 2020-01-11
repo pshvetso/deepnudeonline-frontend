@@ -1,14 +1,5 @@
 <template>
-    <div class="container-fluid">
-
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">Overview</li>
-        </ol>
-
+    <div>
         <h1 class="text-gray-800">Upload image</h1>
 
         <div class="card mb-3">
@@ -27,7 +18,6 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
 </template>
 
 <script>
