@@ -22,7 +22,7 @@ export default new Router({
             component: () => import("./components/UploadForm"),
             meta: {
                 breadcrumbs: [
-                    {name: "Top", link: "top"},
+                    {name: "Top", path: "top"},
                 ]
             }
         },
@@ -40,7 +40,17 @@ export default new Router({
             name: "Top",
             component: () => import("./components/Top"),
             meta: {
-                breadcrumb: [
+                breadcrumbs: [
+                ]
+            }
+        },
+        {
+            path: "/post/:id",
+            name: "Post",
+            component: () => import("./components/PostPage"),
+            props: true,
+            meta: {
+                breadcrumbs: [
                 ]
             }
         },

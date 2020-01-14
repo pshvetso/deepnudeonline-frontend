@@ -4,7 +4,7 @@
             <a href="/">Home</a>
         </li>
         <li v-for="(breadcrumb, id) in breadcrumbs" :key="id" class="breadcrumb-item active">
-            <a :href="breadcrumb.link">{{breadcrumb.name}}</a>
+            <a :href="breadcrumb.path">{{breadcrumb.name}}</a>
         </li>
         <li class="breadcrumb-item active">
             {{$route.name}}
@@ -27,6 +27,7 @@
         methods: {
             update() {
                 this.breadcrumbs = this.$route.meta.breadcrumbs;
+                //window.console.log(this.breadcrumbs);
             }
         },
     }
