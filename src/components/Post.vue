@@ -16,7 +16,7 @@
             <img :src="require(`@/assets/img/u/${post.id}.jpg`)">
         </div>
         <div class="card-footer">
-            <div><i class="far fa-fw fa-heart"></i>{{post.likes}}</div>
+            <div><i class="far fa-heart" :class="{ 'fa-fw': post.likes === 0, 'fas liked': post.likes > 0 }"></i>{{post.likes}}</div>
             <div><i class="far fa-fw fa-eye"></i>{{post.views}}</div>
         </div>
     </div>
@@ -30,7 +30,9 @@
         components: {
             Format
         },
-        props: ['post']
+        props: {
+            post: Object
+        }
     }
 </script>
 

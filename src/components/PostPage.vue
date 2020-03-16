@@ -11,7 +11,9 @@
         components: {
             Post
         },
-        props: ['id'],
+        props: {
+            id: Number
+        },
         data: () => ({
             post: null,
             errors: [],

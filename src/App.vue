@@ -98,7 +98,7 @@
         padding-right: 1.3em;
     }
 
-    .card-footer .fa-heart {
+    .card-footer .fa-heart.liked {
         color: red;
     }
 

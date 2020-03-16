@@ -25,7 +25,11 @@
 
     export default {
         name: "Format",
-        props: ['value', 'fn', 'format'],
+        props: {
+            value: String,
+            fn: String,
+            format: String
+        },
         computed: {
             formatter() {
                 return formatter;

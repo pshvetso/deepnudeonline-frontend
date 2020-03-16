@@ -36,7 +36,8 @@ export default new Router({
             }
         },
         {
-            path: "/top",
+            path: "/top/:interval",
+            props: true,
             name: "Top",
             component: () => import("./components/Top"),
             meta: {
@@ -46,9 +47,9 @@ export default new Router({
         },
         {
             path: "/post/:id",
+            props: true,
             name: "Post",
             component: () => import("./components/PostPage"),
-            props: true,
             meta: {
                 breadcrumbs: [
                 ]
