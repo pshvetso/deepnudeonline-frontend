@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    import Navbar from './components/Navbar.vue'
+    import Navbar from './components/Navbar'
     import Sidebar from "./components/Sidebar";
     import Breadcrumb from "./components/Breadcrumb";
 
@@ -94,12 +94,20 @@
     }
 
     .card-footer i {
-        font-size: 1.4em;
-        padding-right: 1.3em;
+        font-size: 1.4rem;
+        margin-right: 0.4em;
+    }
+
+    .card-footer .fa-heart {
+        color: #888;
+    }
+
+    .card-footer .fa-heart:hover {
+        filter: brightness(125%);
     }
 
     .card-footer .fa-heart.liked {
-        color: red;
+        color: #e00;
     }
 
     .card-footer .fa-eye {

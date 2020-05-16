@@ -1,5 +1,6 @@
 <template>
     <div class="card mb-3">
+        <Viewer></Viewer>
         <div class="post-header">
             <div><img :src="require(`@/assets/img/a/${post.userId}.png`)"/></div>
             <div class="post-user-date">
@@ -16,23 +17,52 @@
             <img :src="require(`@/assets/img/u/${post.id}.jpg`)">
         </div>
         <div class="card-footer">
-            <div><i class="far fa-heart" :class="{ 'fa-fw': post.likes === 0, 'fas liked': post.likes > 0 }"></i>{{post.likes}}</div>
+            <div><i class="far fa-heart" :class="{ 'fa-fw': post.likes === 0, 'fas liked': post.likes > 0 }" v-on:click="likePost(post)"></i>{{post.likes > 0 ? post.likes: ""}}</div>
             <div><i class="far fa-fw fa-eye"></i>{{post.views}}</div>
         </div>
     </div>
 </template>
 
 <script>
-    import Format from './Format.vue';
+    import Format from './Format';
+    import Viewer from './Viewer';
+    import axios from 'axios';
+    import helpers from '../lib/helpers.js';
 
     export default {
         name: "Post",
         components: {
-            Format
+            Format, Viewer
         },
         props: {
             post: Object
-        }
+        },
+        data: () => ({
+            errors: [],
+        }),
+        methods: {
+            likePost(post) {
+                if(post.likes === 0) {
+                    axios
+                        .post("/api/like", helpers.buildHttpParams({id: post.id}))
+                        .then(() => {
+                            post.likes++
+                        })
+                        .catch(error => {
+                            this.errors.push(error);
+                        });
+                } else {
+                    axios
+                        .post("/api/dislike", helpers.buildHttpParams({id: post.id}))
+                        .then(() => {
+                            post.likes--
+                        })
+                        .catch(error => {
+                            this.errors.push(error);
+                        });
+                }
+            },
+        },
     }
 </script>
 

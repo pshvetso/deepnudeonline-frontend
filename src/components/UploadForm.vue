@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import AreaSelect from './AreaSelect.vue'
+    import AreaSelect from './AreaSelect'
 
     export default {
         name: "UploadForm",
