@@ -5,7 +5,8 @@
                 <a href="/"><img src="../assets/img/logo.png" width="31"/></a>
                 deepnudeonline
             </div>
-            <div class="navbar-button">
+            <div>
+                <a href="/contacts" class="contacts">Contacts</a>
                 <a href="/upload" type="button" class="btn btn-outline-primary">
                     <i class="fas fa-fw fa-arrow-alt-from-bottom"></i>
                     Upload
@@ -29,6 +30,10 @@
         height: 60px;
     }
 
+    .navbar a {
+        padding-right: 1rem;
+    }
+
     .navbar .navbar-brand {
         padding-top: 0.1rem;
     }
@@ -37,10 +42,8 @@
         padding-right: 4px;
     }
 
-    @media (min-width: 768px) {
-        .navbar-nav .form-inline .input-group {
-            width: auto;
-        }
+    .navbar .contacts {
+        color: white;
     }
 
     .navbar-fixed-top,

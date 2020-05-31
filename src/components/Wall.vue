@@ -14,17 +14,20 @@
     import ViewerMixin from '../mixins/ViewerMixin';
 
     export default {
-        name: "Feed",
+        name: "Wall",
         components: {
             Post, Viewer
         },
         mixins: [ScrollMixin, CallApiMixin, ViewerMixin],
+        props: {
+            id: Number,
+        },
         data: () => ({
-            startPostId: "",
+            page: 0,
         }),
         computed: {
             apiUrl: function () {
-                return "/api/feed?startFrom=" + this.startPostId
+                return "/api/wall?id=" + this.id + "&page=" + this.page
             }
         }
     };

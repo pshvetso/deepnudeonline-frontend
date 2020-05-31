@@ -27,9 +27,10 @@ export default new Router({
             }
         },
         {
-            path: "/mypage",
-            name: "My page",
-            component: () => import("./components/MyPage"),
+            path: "/wall/:id",
+            props: true,
+            name: "Wall",
+            component: () => import("./components/Wall"),
             meta: {
                 breadcrumbs: [
                 ]
@@ -50,6 +51,15 @@ export default new Router({
             props: true,
             name: "Post",
             component: () => import("./components/PostPage"),
+            meta: {
+                breadcrumbs: [
+                ]
+            }
+        },
+        {
+            path: "/contacts",
+            name: "Contacts",
+            component: () => import("./components/Contacts"),
             meta: {
                 breadcrumbs: [
                 ]

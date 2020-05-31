@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul class="sidebar navbar-nav">
-            <div v-for="routes in links" v-bind:key="routes.id">
+            <div v-for="routes in links" :key="routes.id">
                 <div v-if="routes.header" class="sidebar-heading">
                     {{routes.header}}
                 </div>
@@ -13,7 +13,7 @@
                         </a>
                     </li>
                 </router-link>
-                <hr v-if="routes.hr" class="sidebar-divider" v-bind:key="routes.id">
+                <hr v-if="routes.hr" class="sidebar-divider" :key="routes.id">
             </div>
         </ul>
     </div>
@@ -27,7 +27,7 @@
                 {
                     id: 0,
                     text: 'My page',
-                    page: '/mypage',
+                    page: {path: '/wall/0'},
                     class: 'far fa-address-card',
                 },
                 {
@@ -188,6 +188,11 @@
         .sidebar-heading {
             text-align: left;
         }
+
+        .sidebar .nav-item .nav-link {
+            color: #555;
+        }
+
     }
 
 
