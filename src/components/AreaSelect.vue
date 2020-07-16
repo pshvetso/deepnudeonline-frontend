@@ -109,5 +109,6 @@
     canvas {
         border: 1px solid red;
         width: 100%;
+        background-color: lightyellow;
     }
 </style>

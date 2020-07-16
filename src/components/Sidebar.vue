@@ -111,9 +111,8 @@
         display: block;
     }
 
-    .sidebar .nav-item.active .nav-link span,
-    .sidebar .nav-item .nav-link:active span {
-        color: black;
+    .sidebar .nav-item:hover .nav-link span {
+        color: white;
     }
 
     .sidebar .nav-item .nav-link i {
