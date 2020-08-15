@@ -10,7 +10,7 @@
                 </div>
                 <div class="date">
                     <router-link :to="{ name: 'Post', params: { id: post.id }}">
-                        <Format :value="post.date" fn="datetime"/>
+                        <Format :value="post.date" fn="postDate"/>
                     </router-link>
                 </div>
             </div>

@@ -1,11 +1,20 @@
 <template>
     <div>
         <div class="file-upload-form">
-            Upload an image file:
-            <input type="file" @change="previewImage" accept="image/*">
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload an image file</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" ref="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01"
+                           @change="previewImage" accept="image/*">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
         </div>
         <div class="image-preview">
-            <p>Drag to make a selection:</p>
+            <p>Drag to make a selection</p>
             <!-- img class="preview" v-if="imageData.length > 0" :src="imageData" -->
             <canvas id="canvas"></canvas>
         </div>

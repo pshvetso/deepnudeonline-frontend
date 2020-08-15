@@ -3,6 +3,7 @@
         <div id="wrapper">
             <Navbar></Navbar>
             <Sidebar></Sidebar>
+            <Elevator></Elevator>
             <div id="content-wrapper">
                 <div class="container-fluid">
                     <breadcrumb></breadcrumb>
@@ -17,10 +18,12 @@
     import Navbar from './components/Navbar'
     import Sidebar from "./components/Sidebar";
     import Breadcrumb from "./components/Breadcrumb";
+    import Elevator from "./components/Elevator";
 
     export default {
         name: 'app',
         components: {
+            Elevator,
             Breadcrumb,
             Sidebar,
             Navbar
@@ -45,6 +48,16 @@
         font-weight: 400;
         line-height: 1.2;
         margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .large-media {
+            display: none;
+        }
+    }
+
+    .container .container-fluid {
+        padding-right: 0;
     }
 
     #wrapper {

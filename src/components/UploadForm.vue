@@ -7,13 +7,13 @@
 
             <div class="card-body">
                 <form name="upload_image_form" target="upload.html">
-                    <label>
-                        Text:
-                        <input name="descr" type="text" class="form-control form-control-sm" />
-                    </label>
+                    <div class="form-group">
+                        <label for="descr">Text</label>
+                        <input name="descr" id="descr" type="text" class="form-control form-control-sm"/>
+                    </div>
                     <AreaSelect></AreaSelect>
-                    <input type="submit" value="Upload" class="btn btn-brand btn-upper btn-bold" />
-                    <input type="button" value="Cancel" class="btn" />
+                    <input type="submit" value="Upload" class="btn btn-brand btn-upper btn-bold"/>
+                    <input type="button" value="Cancel" class="btn"/>
                 </form>
             </div>
         </div>

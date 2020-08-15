@@ -6,7 +6,7 @@
                 deepnudeonline
             </div>
             <div>
-                <a href="/contacts" class="contacts">Contacts</a>
+                <a href="/contacts" class="contacts large-media">Contacts</a>
                 <a href="/upload" type="button" class="btn btn-outline-primary">
                     <i class="fas fa-fw fa-arrow-alt-from-bottom"></i>
                     Upload
@@ -28,6 +28,7 @@
         color: white;
         border-top: 3px #007bff solid;
         height: 60px;
+        padding: 0;
     }
 
     .navbar a {
