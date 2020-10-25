@@ -30,7 +30,6 @@
                         if (data.length > 0) {
                             this.posts.push(...data);
                             this.page++;
-                            this.startPostId = data[data.length - 1].id;
                         } else {
                             this.noMoreData = true;
                         }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <fieldset :disabled="disabled" v-if="!msgSent">
+        <fieldset :disabled="disabled" v-if="!msg">
 
             <h2>Сontact us</h2>
 
@@ -43,7 +43,7 @@
 
         </fieldset>
         <div v-else>
-            <h3>Your message has been sent. Thank you!</h3>
+            <h3>{{msg}}</h3>
         </div>
     </div>
 </template>
@@ -61,7 +61,7 @@
             inputText: null,
 
             disabled: false,
-            msgSent: false
+            msg: false
         }),
         methods: {
             validateForm: function () {
@@ -105,7 +105,10 @@
                         }
                     ).then(response => {
                         window.console.log(response);
-                        this.msgSent = true;
+                        this.msg = "Your message has been sent. Thank you!";
+                    }).catch((error) => {
+                        window.console.log(error);
+                        this.msg = error.response.data.message;
                     });
                 }
             }
