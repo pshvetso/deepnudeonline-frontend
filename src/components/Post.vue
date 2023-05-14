@@ -20,7 +20,7 @@
             <img :src="imgSrc" @click="$emit('show-viewer', imgSrc)">
         </div>
         <div class="card-footer">
-            <div><i class="far fa-heart" :class="{ 'fa-fw': post.likes === 0, 'fas liked': post.likes > 0 }" @click="likePost(post)"></i>{{post.likes > 0 ? post.likes: ""}}</div>
+            <div><i class="far fa-heart" :class="{ 'fa-fw': post.liked === null, 'fas liked': (post.liked !== null) && (post.liked !== undefined) }" @click="likePost(post)"></i>{{post.likes > 0 ? post.likes: ""}}</div>
             <div><i class="far fa-fw fa-eye"></i>{{post.views}}</div>
         </div>
     </div>
@@ -46,7 +46,7 @@
             likePost(post) {
                 if(post.likes === 0) {
                     axios
-                        .post("/api/like", helpers.buildHttpParams({id: post.id}))
+                        .post("/api/v1/like", helpers.buildHttpParams({id: post.id}))
                         .then(() => {
                             post.likes++
                         })
@@ -55,7 +55,7 @@
                         });
                 } else {
                     axios
-                        .post("/api/dislike", helpers.buildHttpParams({id: post.id}))
+                        .post("/api/v1/dislike", helpers.buildHttpParams({id: post.id}))
                         .then(() => {
                             post.likes--
                         })
@@ -96,4 +96,8 @@
         font-size: 0.9em;
     }
 
-</style>
+    .card-footer .far.fa-heart {
+        cursor: pointer;
+    }
+
+</style>p

@@ -20,11 +20,14 @@
         },
         mixins: [ScrollMixin, CallApiMixin, ViewerMixin],
         data: () => ({
-            page: 0,
+            postId: "",
         }),
         computed: {
             apiUrl: function () {
-                return "/api/feed?page=" + this.page
+                return "/api/v1/feed?postId=" + this.postId
+            },
+            apiDataUrl: function () {
+                return "/api/v1/feedData?postId=" + this.postId
             }
         }
     };

@@ -40,7 +40,7 @@
         methods: {
             callAPI() {
                 axios
-                    .get("/api/post?id=" + this.id)
+                    .get("/api/v1/post?id=" + this.id)
                     .then(response => {
                         this.post = response.data;
                     })

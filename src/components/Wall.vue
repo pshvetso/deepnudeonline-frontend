@@ -27,7 +27,7 @@
         }),
         computed: {
             apiUrl: function () {
-                return "/api/wall?id=" + this.id + "&page=" + this.page
+                return "/api/v1/wall?id=" + this.id + "&page=" + this.page
             }
         }
     };

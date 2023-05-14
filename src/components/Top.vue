@@ -27,7 +27,7 @@
         }),
         computed: {
             apiUrl: function () {
-                return "/api/top?interval=" + this.interval + "&page=" + this.page
+                return "/api/v1/vtop?interval=" + this.interval + "&page=" + this.page
             }
         }
     };
