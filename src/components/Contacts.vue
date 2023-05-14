@@ -14,18 +14,18 @@
 
             <form id="contactsForm" @submit.prevent="sendForm">
                 <div class="form-group">
-                    <label for="inputName">Your name</label>
-                    <input type="text" class="form-control" id="inputName" name="inputName" v-model="inputName"
+                    <label for="name">Your name</label>
+                    <input type="text" class="form-control" id="name" name="name" v-model="contactsFormData.name"
                            placeholder="Enter your name">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail">Email address</label>
-                    <input type="email" class="form-control" id="inputEmail" name="inputEmail" v-model="inputEmail"
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" v-model="contactsFormData.email"
                            placeholder="Enter email">
                 </div>
                 <div class="form-group">
-                    <label for="inputText">Message</label>
-                    <textarea class="form-control" id="inputText" name="inputText" v-model="inputText"
+                    <label for="text">Message</label>
+                    <textarea class="form-control" id="text" name="text" v-model="contactsFormData.text"
                               placeholder="Message"></textarea>
                 </div>
                 <div class="input-group form-group">
@@ -33,9 +33,9 @@
                         <span class="input-group-text" id="inputGroupFileAddon01">Attach file</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" ref="file" class="custom-file-input" id="inputGroupFile01"
+                        <input type="file" ref="file" class="custom-file-input" id="attach"
                                aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        <label class="custom-file-label" for="attach">Choose file</label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
@@ -56,9 +56,11 @@
         data: () => ({
             errors: [],
 
-            inputName: null,
-            inputEmail: null,
-            inputText: null,
+            contactsFormData: {
+                name: null,
+                email: null,
+                text: null
+            },
 
             disabled: false,
             msg: false
@@ -67,13 +69,13 @@
             validateForm: function () {
                 this.errors = [];
 
-                if (!this.inputName) {
+                if (!this.contactsFormData.name) {
                     this.errors.push('Please enter your name.');
                 }
-                if (!this.inputEmail) {
+                if (!this.contactsFormData.email) {
                     this.errors.push('Please enter e-mail.');
                 }
-                if (!this.inputText) {
+                if (!this.contactsFormData.text) {
                     this.errors.push('Please enter your message.');
                 }
 
@@ -84,33 +86,31 @@
 
                 this.disabled = true;
 
-                let contactsForm = document.getElementById('contactsForm');
-                let formData = new FormData(contactsForm);
+                //let contactsForm = document.getElementById('contactsForm');
+                const formData = new FormData();
+                formData.append('contactsData', new Blob([JSON.stringify(this.contactsFormData)], {
+                    type: "application/json"
+                }));
 
-                if(this.$refs.file.files.length === 0) {
-                    axios.post('/api/contacts', formData)
-                        .then(response => {
-                            window.console.log(response);
-                            this.msgSent = true;
-                        });
-                } else {
-                    formData.append('inputGroupFile01', this.$refs.file.files[0]);
+                let config = {};
 
-                    axios.post('/api/contactsattach',
-                        formData,
-                        {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
+                if(this.$refs.file.files.length !== 0) {
+                    formData.append('attach', this.$refs.file.files[0]);
+
+                    config = {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
                         }
-                    ).then(response => {
-                        window.console.log(response);
-                        this.msg = "Your message has been sent. Thank you!";
-                    }).catch((error) => {
-                        window.console.log(error);
-                        this.msg = error.response.data.message;
-                    });
+                    }
                 }
+
+                axios.post('/api/v1/contacts', formData, config).then(response => {
+                    window.console.log(response);
+                    this.msg = "Your message has been sent. Thank you!";
+                }).catch((error) => {
+                    window.console.log(error);
+                    this.msg = error.response.data.message;
+                });
             }
         }
     }
